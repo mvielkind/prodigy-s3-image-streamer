@@ -1,4 +1,4 @@
-from typing import Text, Dict, Any
+from typing import Text, Dict, Any, List
 from collections.abc import Generator
 
 import boto3
@@ -14,7 +14,7 @@ s3 = boto3.client('s3')
 @prodigy.recipe("stream-from-s3")
 def stream_from_s3(dataset: Text, bucket: Text, prefix: Text=None) -> Dict[Text, Any]:
 
-    def before_db(examples):
+    def before_db(examples: List) -> List[Dict[Text, Any]]:
         '''
         Replaces the raw image data with the S3 key of the image before writing to the Prodigy DB.
         '''
